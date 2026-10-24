@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tu estilo, Tu cita | Agenda tu cita de peluquería</title>
+  <meta name="description" content="Agenda tu cita para peinados, cortes y arreglos capilares de forma fácil y rápida.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="icon" href="img/logo.png">
+</head>
+<body>
+
+  <!-- ========== ENCABEZADO ========== -->
+  <header class="encabezado">
+    <div class="contenedor encabezado__fila">
+      <a href="#inicio" class="marca" aria-label="Tu estilo, Tu cita - inicio">
+        <img src="img/logo.png" alt="" class="marca__logo" width="82" height="85">
+        <span class="marca__texto">Tu estilo, Tu cita</span>
+      </a>
+
+      <nav class="menu" aria-label="Navegación principal">
+        <a href="#inicio" class="menu__enlace menu__enlace--inicio">Inicio</a>
+        <a href="#servicios" class="menu__enlace menu__enlace--servicios">Servicios</a>
+        <a href="#horarios" class="menu__enlace menu__enlace--horarios">Horarios</a>
+        <a href="#contacto" class="menu__enlace menu__enlace--contacto">Contacto</a>
+      </nav>
+
+      <a href="#agendar" class="boton boton--chico encabezado__cta">Agendar cita</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ========== INICIO / HERO ========== -->
+    <section id="inicio" class="hero">
+      <div class="contenedor hero__fila">
+        <div class="hero__texto">
+          <h1 class="hero__titulo">
+            Tu cabello, tu estilo
+            <svg class="hero__destello" viewBox="0 0 60 60" aria-hidden="true">
+              <path d="M8 22 L22 4" /><path d="M16 34 L40 20" /><path d="M20 50 L52 50" />
+            </svg>
+          </h1>
+          <p class="hero__subtitulo">Agenda tu cita de forma fácil y rápida</p>
+          <a href="#agendar" class="boton boton--grande">
+            Reservar ahora
+            <svg viewBox="0 0 24 24" class="icono" aria-hidden="true"><path d="M9 5l7 7-7 7" /></svg>
+          </a>
+        </div>
+        <img src="img/hero-mujer.png" alt="Ilustración de una mujer con cabello largo y unas tijeras"
+             class="hero__imagen" width="914" height="584">
+      </div>
+      <svg class="hero__ola" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 60 C 240 120, 520 0, 820 40 S 1260 120, 1440 30 L1440 120 L0 120 Z" />
+      </svg>
+    </section>
+
+    <!-- ========== SERVICIOS ========== -->
+    <section id="servicios" class="seccion">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Nuestros servicios</h2>
+
+        <ul class="servicios">
+          <li class="tarjeta-servicio">
+            <span class="tarjeta-servicio__icono"><img src="img/icono-peinados.png" alt="" width="201" height="214"></span>
+            <div>
+              <h3 class="tarjeta-servicio__nombre">Peinados</h3>
+              <p class="tarjeta-servicio__detalle">Recogidos, trenzas y ondas para el día a día o eventos especiales.</p>
+            </div>
+          </li>
+          <li class="tarjeta-servicio">
+            <span class="tarjeta-servicio__icono"><img src="img/icono-cortes.png" alt="" width="164" height="206"></span>
+            <div>
+              <h3 class="tarjeta-servicio__nombre">Cortes</h3>
+              <p class="tarjeta-servicio__detalle">Cortes en capas, flequillos, despuntes y cambios de look.</p>
+            </div>
+          </li>
+          <li class="tarjeta-servicio">
+            <span class="tarjeta-servicio__icono"><img src="img/icono-arreglos.png" alt="" width="185" height="183"></span>
+            <div>
+              <h3 class="tarjeta-servicio__nombre">Arreglos capilares</h3>
+              <p class="tarjeta-servicio__detalle">Cepillados, planchados, hidratación y tratamientos.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== HORARIOS ========== -->
+    <section id="horarios" class="seccion seccion--compacta">
+      <div class="contenedor">
+        <h2 class="titulo-seccion">Horarios de atención</h2>
+
+        <div class="horarios">
+          <div class="horario">
+            <svg viewBox="0 0 24 24" class="icono horario__icono" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            <h3 class="horario__dia">Lunes a viernes</h3>
+            <p class="horario__hora">9:00 a.m. – 7:00 p.m.</p>
+          </div>
+          <div class="horario">
+            <svg viewBox="0 0 24 24" class="icono horario__icono" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
+            <h3 class="horario__dia">Sábados</h3>
+            <p class="horario__hora">8:00 a.m. – 5:00 p.m.</p>
+          </div>
+          <div class="horario horario--cerrado">
+            <svg viewBox="0 0 24 24" class="icono horario__icono" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg>
+            <h3 class="horario__dia">Domingos y festivos</h3>
+            <p class="horario__hora">Cerrado</p>
+          </div>
+        </div>
+        <p class="horarios__nota">Las citas se asignan cada hora. Te confirmamos la disponibilidad por llamada o WhatsApp.</p>
+      </div>
+    </section>
+
+    <!-- ========== FORMULARIO ========== -->
+    <section id="agendar" class="seccion seccion--formulario">
+      <div class="contenedor">
+        <div class="caja-formulario">
+          <h2 class="titulo-seccion">Agenda tu cita</h2>
+          <p class="caja-formulario__intro">Completa todos los campos y te contactaremos para confirmar tu cita.</p>
+
+          <!-- Sin backend: al enviar, el navegador valida los campos y muestra la confirmación (#confirmacion).
+               Los campos no tienen atributo "name" para que los datos personales no queden en la URL. -->
+          <form class="formulario" action="#confirmacion" method="get">
+            <div class="campo">
+              <label for="nombre" class="solo-lector">Nombre completo</label>
+              <svg viewBox="0 0 24 24" class="campo__icono" aria-hidden="true"><circle cx="12" cy="8" r="4" class="relleno"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z" class="relleno"/></svg>
+              <input type="text" id="nombre" placeholder="Nombre completo" autocomplete="name"
+                     required minlength="3" maxlength="60" pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]+"
+                     aria-describedby="error-nombre">
+              <span class="campo__error" id="error-nombre">Escribe tu nombre completo (solo letras).</span>
+            </div>
+
+            <div class="campo">
+              <label for="edad" class="solo-lector">Edad</label>
+              <svg viewBox="0 0 24 24" class="campo__icono" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
+              <input type="number" id="edad" placeholder="Edad" required min="12" max="99" inputmode="numeric"
+                     aria-describedby="error-edad">
+              <span class="campo__error" id="error-edad">Escribe tu edad (debes tener 12 años o más).</span>
+            </div>
+
+            <div class="campo">
+              <label for="telefono" class="solo-lector">Número de contacto</label>
+              <svg viewBox="0 0 24 24" class="campo__icono" aria-hidden="true"><path class="relleno" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+              <input type="tel" id="telefono" placeholder="Número de contacto" autocomplete="tel"
+                     required pattern="[0-9]{10}" maxlength="10" inputmode="numeric"
+                     aria-describedby="error-telefono">
+              <span class="campo__error" id="error-telefono">Escribe un celular de 10 dígitos, sin espacios.</span>
+            </div>
+
+            <div class="campo campo--lista">
+              <label for="servicio" class="solo-lector">Servicio</label>
+              <svg viewBox="0 0 24 24" class="campo__icono" aria-hidden="true"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8 16L19 3M16 16L5 3"/></svg>
+              <select id="servicio" required aria-describedby="error-servicio">
+                <option value="" disabled selected hidden>Servicio</option>
+                <option>Peinados</option>
+                <option>Cortes</option>
+                <option>Arreglos capilares</option>
+              </select>
+              <span class="campo__error" id="error-servicio">Elige el servicio que deseas.</span>
+            </div>
+
+            <div class="campo campo--fecha">
+              <label for="fecha" class="solo-lector">Fecha</label>
+              <svg viewBox="0 0 24 24" class="campo__icono" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4M8 14h2M12 14h2M16 14h0M8 17h2M12 17h2"/></svg>
+              <input type="date" id="fecha" required aria-describedby="error-fecha">
+              <span class="campo__marcador" aria-hidden="true">Fecha</span>
+              <span class="campo__error" id="error-fecha">Selecciona la fecha de tu cita.</span>
+            </div>
+
+            <div class="campo campo--lista">
+              <label for="hora" class="solo-lector">Hora</label>
+              <svg viewBox="0 0 24 24" class="campo__icono" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <select id="hora" required aria-describedby="error-hora">
+                <option value="" disabled selected hidden>Hora</option>
+                <option>8:00 a.m. (solo sábados)</option>
+                <option>9:00 a.m.</option>
+                <option>10:00 a.m.</option>
+                <option>11:00 a.m.</option>
+                <option>12:00 p.m.</option>
+                <option>2:00 p.m.</option>
+                <option>3:00 p.m.</option>
+                <option>4:00 p.m.</option>
+                <option>5:00 p.m.</option>
+                <option>6:00 p.m. (lunes a viernes)</option>
+              </select>
+              <span class="campo__error" id="error-hora">Elige la hora de tu cita.</span>
+            </div>
+
+            <label class="consentimiento">
+              <input type="checkbox" required>
+              <span>Acepto que mis datos se usen <strong>solo para gestionar mi cita</strong>.</span>
+            </label>
+
+            <p class="formulario__aviso" role="alert">Revisa los campos marcados en rojo antes de enviar.</p>
+
+            <button type="submit" class="boton boton--enviar">
+              Enviar solicitud
+              <svg viewBox="0 0 24 24" class="icono icono--relleno" aria-hidden="true"><path d="M2.5 11.2 21 3.5l-6.3 17.6-3.4-7.1zM11.3 14 21 3.5"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== CONTACTO / PIE ========== -->
+  <footer id="contacto" class="pie">
+    <div class="contenedor pie__fila">
+      <h2 class="pie__titulo">Contacto</h2>
+
+      <a href="mailto:contacto@tuestilotucita.com" class="pie__dato">
+        <svg viewBox="0 0 24 24" class="icono" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="M3 6l9 7 9-7"/></svg>
+        Correo: contacto@tuestilotucita.com
+      </a>
+
+      <p class="pie__lema">
+        <svg viewBox="0 0 24 24" class="icono" aria-hidden="true"><path d="M12 20s-7.5-4.6-9-9.3C2 7.4 4.2 4.5 7.3 4.5c2 0 3.4 1.1 4.7 2.8 1.3-1.7 2.7-2.8 4.7-2.8 3.1 0 5.3 2.9 4.3 6.2-1.5 4.7-9 9.3-9 9.3z"/></svg>
+        Belleza y cuidado en un solo lugar
+      </p>
+
+      <ul class="redes" aria-label="Redes sociales">
+        <li><a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg viewBox="0 0 24 24" class="icono" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle cx="12" cy="12" r="3.6"/><circle cx="16.8" cy="7.2" r=".6" class="relleno"/></svg>
+        </a></li>
+        <li><a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg viewBox="0 0 24 24" class="icono icono--relleno" aria-hidden="true"><path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.9.3-1.5 1.5-1.5h1.6V4.4c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9v2.3H7.9v3h2.6V21z"/></svg>
+        </a></li>
+        <li><a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg viewBox="0 0 24 24" class="icono icono--relleno" aria-hidden="true"><path d="M15.6 3c.4 2.2 1.8 3.7 4 3.9v3c-1.5 0-2.8-.4-4-1.2v6.2a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v3.1a2.6 2.6 0 1 0 1.7 2.4V3z"/></svg>
+        </a></li>
+      </ul>
+    </div>
+    <p class="pie__legal">Tus datos se usan únicamente para gestionar tu solicitud de cita. © 2026 Tu estilo, Tu cita.</p>
+  </footer>
+
+  <!-- ========== CONFIRMACIÓN (se muestra con :target al enviar el formulario) ========== -->
+  <div id="confirmacion" class="confirmacion" role="dialog" aria-labelledby="confirmacion-titulo">
+    <div class="confirmacion__caja">
+      <span class="confirmacion__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" class="icono"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+      </span>
+      <h2 id="confirmacion-titulo" class="confirmacion__titulo">¡Solicitud enviada!</h2>
+      <p>Recibimos tu solicitud de cita. Te contactaremos al número que registraste para confirmar la fecha y la hora.</p>
+      <a href="#inicio" class="boton boton--chico">Entendido</a>
+    </div>
+  </div>
+
+</body>
+</html>
