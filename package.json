@@ -1,0 +1,36 @@
+{
+  "name": "tu-estilo-tu-cita",
+  "version": "1.0.0",
+  "description": "Landing page para agendar citas de peluquería: React + Vite en el frontend, Express y SQLite en el backend.",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch-path=server.js --watch-path=src server.js --dev",
+    "build": "vite build",
+    "start": "node server.js",
+    "calendario": "node scripts/calendario.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JuanFRodas/TuEstilo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/JuanFRodas/TuEstilo/issues"
+  },
+  "homepage": "https://github.com/JuanFRodas/TuEstilo#readme",
+  "license": "ISC",
+  "dependencies": {
+    "better-sqlite3": "^11.10.0",
+    "express": "^4.22.3",
+    "google-auth-library": "^11.3.1",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.7.0",
+    "vite": "^6.4.5"
+  }
+}

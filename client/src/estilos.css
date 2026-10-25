@@ -172,14 +172,12 @@ a { color: inherit; }
 /* Enlace activo según la sección elegida (solo CSS, con :target) */
 body:not(:has(:target)) .menu__enlace--inicio,
 body:has(#inicio:target) .menu__enlace--inicio,
-body:has(#confirmacion:target) .menu__enlace--inicio,
 body:has(#servicios:target) .menu__enlace--servicios,
 body:has(#horarios:target) .menu__enlace--horarios,
 body:has(#contacto:target) .menu__enlace--contacto { color: var(--rosa-500); }
 
 body:not(:has(:target)) .menu__enlace--inicio::after,
 body:has(#inicio:target) .menu__enlace--inicio::after,
-body:has(#confirmacion:target) .menu__enlace--inicio::after,
 body:has(#servicios:target) .menu__enlace--servicios::after,
 body:has(#horarios:target) .menu__enlace--horarios::after,
 body:has(#contacto:target) .menu__enlace--contacto::after { transform: scaleX(1); }
@@ -324,6 +322,9 @@ body:has(#contacto:target) .menu__enlace--contacto::after { transform: scaleX(1)
 .horario--cerrado .horario__hora { color: var(--texto-suave); font-style: italic; }
 .horarios__nota { margin-top: 16px; text-align: center; color: var(--texto-suave); }
 
+.seccion__mensaje { text-align: center; color: var(--texto-suave); }
+.seccion__mensaje--error { color: var(--error); font-weight: 600; }
+
 /* ---------- Formulario ---------- */
 .caja-formulario {
   padding: 26px clamp(18px, 3vw, 36px) 32px;
@@ -392,19 +393,12 @@ body:has(#contacto:target) .menu__enlace--contacto::after { transform: scaleX(1)
 .campo input[type="number"]::-webkit-inner-spin-button,
 .campo input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
-/* Fecha: muestra "Fecha" como texto guía mientras esté vacía */
-.campo--fecha input { cursor: pointer; }
-.campo--fecha input::-webkit-calendar-picker-indicator { cursor: pointer; opacity: .6; }
-.campo--fecha input:invalid:not(:focus) { color: transparent; }
-.campo__marcador {
-  position: absolute;
-  left: 60px; top: 12px;
-  color: var(--texto);
-  opacity: .85;
-  pointer-events: none;
+/* La hora queda bloqueada hasta que se elige una fecha */
+.campo select:disabled {
+  cursor: not-allowed;
+  background-color: #fdf6f8;
+  color: var(--texto-suave);
 }
-.campo--fecha input:focus ~ .campo__marcador,
-.campo--fecha input:valid ~ .campo__marcador { display: none; }
 
 /* Mensajes de error (aparecen solo después de que la usuaria interactúa) */
 .campo__error {
@@ -446,6 +440,22 @@ body:has(#contacto:target) .menu__enlace--contacto::after { transform: scaleX(1)
   color: var(--error);
 }
 .formulario:has(:user-invalid) .formulario__aviso { display: block; }
+
+/* Errores que responde el servidor (hora ya tomada, sin conexión, etc.) */
+.formulario__estado {
+  grid-column: 1 / -1;
+  justify-self: center;
+  max-width: 640px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  background: #fff1f3;
+  border: 1px solid #f2b8c0;
+  text-align: center;
+  font-weight: 600;
+  color: var(--error);
+}
+
+.boton:disabled { opacity: .7; cursor: wait; transform: none; }
 
 .formulario .boton--enviar {
   grid-column: 1 / -1;
@@ -532,17 +542,23 @@ body:has(#contacto:target) .menu__enlace--contacto::after { transform: scaleX(1)
 }
 
 /* ---------- Confirmación de envío ---------- */
+/* El <dialog> ocupa toda la pantalla y hace de fondo oscuro */
 .confirmacion {
   position: fixed;
   inset: 0;
-  z-index: 50;
-  display: none;
-  place-items: center;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  border: 0;
   padding: 20px;
+  color: var(--texto);
   background: rgba(122, 36, 69, .45);
   backdrop-filter: blur(3px);
 }
-.confirmacion:target { display: grid; }
+.confirmacion[open] { display: grid; place-items: center; }
+.confirmacion::backdrop { background: transparent; }
 
 .confirmacion__caja {
   max-width: 440px;
@@ -554,6 +570,18 @@ body:has(#contacto:target) .menu__enlace--contacto::after { transform: scaleX(1)
   animation: aparecer .35s ease-out;
 }
 .confirmacion__caja p { margin: 10px 0 24px; }
+.confirmacion__detalle {
+  display: grid;
+  gap: 6px;
+  margin: -8px 0 24px;
+  padding: 14px 18px;
+  border-radius: 14px;
+  background: var(--rosa-100);
+  text-align: left;
+}
+.confirmacion__detalle div { display: flex; justify-content: space-between; gap: 16px; }
+.confirmacion__detalle dt { color: var(--texto-suave); }
+.confirmacion__detalle dd { margin: 0; font-weight: 700; color: var(--vino); text-align: right; }
 .confirmacion__check {
   display: grid;
   place-items: center;
