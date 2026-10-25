@@ -1,7 +1,8 @@
 # Tu estilo, Tu cita
 
 Landing page para agendar citas de peluquería (peinados, cortes y arreglos capilares).
-Frontend en **React** (con Vite); backend en **Express** con base de datos **SQLite**.
+Frontend en **React** (con Vite); backend en **Express** con base de datos **SQLite / libSQL**
+(un archivo local para desarrollar y [Turso](https://turso.tech) en producción). Se publica en **Vercel**.
 Cada cita nueva se guarda en la base de datos y se crea como evento en **Google Calendar**.
 
 ## Cómo ejecutarlo
@@ -27,7 +28,33 @@ npm start
 ```
 
 En ambos casos se abre <http://localhost:3000>.
-La base de datos se crea sola en `data/tuestilo.db` la primera vez.
+En local, si `TURSO_DATABASE_URL` está vacío, la base de datos es el archivo `data/tuestilo.db` (se crea sola).
+Las tablas se crean solas la primera vez, tanto en el archivo como en Turso.
+
+## Publicar en Vercel
+
+En Vercel la página (React) se publica como sitio estático y la API (Express) corre como una función
+(`api/index.js`). `vercel.json` ya tiene la configuración. Como Vercel no guarda archivos, la base de datos
+va en **Turso**, una base de datos en la nube compatible con SQLite (tiene plan gratis).
+
+1. **Crear la base en Turso.** Entrar a <https://app.turso.tech> (se puede con la cuenta de GitHub) →
+   **Create Database** → nombre `tuestilo`, región cercana a Vercel (por ejemplo AWS us-east-1).
+2. **Copiar la URL y crear un token.** En la base de datos → **Connect**: copiar la URL
+   (empieza por `libsql://...turso.io`) y crear un token con permiso de lectura y escritura.
+3. **Variables de entorno en Vercel.** En el proyecto de Vercel → **Settings → Environment Variables**, agregar:
+
+   | Variable | Valor |
+   |---|---|
+   | `TURSO_DATABASE_URL` | la URL `libsql://...` de Turso |
+   | `TURSO_AUTH_TOKEN` | el token de Turso |
+   | `GOOGLE_CALENDAR_ID` | el id del calendario (el correo de Gmail para el calendario principal) |
+   | `GOOGLE_CREDENCIALES_JSON` | el **contenido completo** del archivo `credenciales/google-calendar.json` (abrirlo, copiar todo y pegarlo) |
+
+4. **Volver a publicar.** En **Deployments** → el último → **Redeploy** (o subir un cambio a GitHub).
+
+Las tablas se crean solas en Turso con la primera visita. Para usar esa misma base desde tu computador
+(por ejemplo para correr `npm run calendario` sobre las citas reales), pon `TURSO_DATABASE_URL` y
+`TURSO_AUTH_TOKEN` también en tu `.env`.
 
 ## Google Calendar
 
@@ -62,8 +89,8 @@ Pasos (una sola vez):
    Si algo falla, explica qué revisar (calendario no compartido, credenciales inválidas, etc.).
 
 Si Google Calendar no está configurado o falla, **la cita se guarda igual** y queda marcada en la columna
-`calendario_estado` como `pendiente` o `error`. Esas citas se pasan al calendario solas la próxima vez que
-arranca el servidor, o al ejecutar `npm run calendario`. Cada evento tiene un id propio (`calendario_evento_id`),
+`calendario_estado` como `pendiente` o `error`. Esas citas se pasan al calendario al ejecutar
+`npm run calendario` o, en local, solas la próxima vez que arranca el servidor. Cada evento tiene un id propio (`calendario_evento_id`),
 así que reintentar nunca crea eventos duplicados.
 
 ## Cómo funciona la disponibilidad
@@ -81,8 +108,11 @@ Los horarios se cambian en `src/horarios.js` (`HORAS_POR_DIA`).
 ## Estructura
 
 ```
-server.js                 Servidor Express: API y frontend (Vite en desarrollo, client/dist en producción)
-src/db.js                 Base de datos (tablas, consultas)
+src/app.js                API en Express (rutas /api/*)
+server.js                 Servidor local: la API más el frontend (Vite en desarrollo, client/dist en producción)
+api/index.js              Función de Vercel: expone la API de src/app.js
+vercel.json               Configuración de Vercel (compilar React, publicar client/dist, enviar /api/* a la función)
+src/db.js                 Base de datos libSQL: archivo local o Turso (tablas, consultas)
 src/horarios.js           Horarios, festivos y horas libres
 src/validacion.js         Validación de los datos de la cita
 src/calendario.js         Conexión con Google Calendar (crear eventos)

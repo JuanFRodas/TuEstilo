@@ -5,13 +5,13 @@ import { existsSync } from 'node:fs';
 import { calendarioConfigurado, explicarError, probarCalendario } from '../src/calendario.js';
 import { sincronizarPendientes } from '../src/sincronizacion.js';
 
-const { GOOGLE_CREDENCIALES, GOOGLE_CALENDAR_ID } = process.env;
+const { GOOGLE_CREDENCIALES, GOOGLE_CREDENCIALES_JSON, GOOGLE_CALENDAR_ID } = process.env;
 
 if (!calendarioConfigurado()) {
   console.log('Google Calendar todavía no está configurado:');
   if (!GOOGLE_CALENDAR_ID) console.log('  - Falta GOOGLE_CALENDAR_ID en .env');
-  if (!GOOGLE_CREDENCIALES) console.log('  - Falta GOOGLE_CREDENCIALES en .env');
-  else if (!existsSync(GOOGLE_CREDENCIALES)) console.log(`  - No existe el archivo de credenciales: ${GOOGLE_CREDENCIALES}`);
+  if (!GOOGLE_CREDENCIALES && !GOOGLE_CREDENCIALES_JSON) console.log('  - Falta GOOGLE_CREDENCIALES (o GOOGLE_CREDENCIALES_JSON) en .env');
+  else if (!GOOGLE_CREDENCIALES_JSON && !existsSync(GOOGLE_CREDENCIALES)) console.log(`  - No existe el archivo de credenciales: ${GOOGLE_CREDENCIALES}`);
   console.log('Sigue los pasos de la sección "Google Calendar" del README.');
   process.exit(1);
 }

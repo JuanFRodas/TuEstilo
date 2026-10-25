@@ -1,7 +1,7 @@
 {
   "name": "tu-estilo-tu-cita",
   "version": "1.0.0",
-  "description": "Landing page para agendar citas de peluquería: React + Vite en el frontend, Express y SQLite en el backend.",
+  "description": "Landing page para agendar citas de peluquería: React + Vite, API en Express, base de datos Turso (libSQL) y Google Calendar. Lista para Vercel.",
   "main": "server.js",
   "type": "module",
   "scripts": {
@@ -11,7 +11,7 @@
     "calendario": "node scripts/calendario.js"
   },
   "engines": {
-    "node": ">=22"
+    "node": "22.x"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
   "homepage": "https://github.com/JuanFRodas/TuEstilo#readme",
   "license": "ISC",
   "dependencies": {
-    "better-sqlite3": "^11.10.0",
+    "@libsql/client": "^0.18.0",
     "express": "^4.22.3",
     "google-auth-library": "^11.3.1",
     "react": "^19.3.1",

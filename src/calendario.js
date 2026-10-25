@@ -9,15 +9,24 @@ const COLOR_FLAMENCO = '4'; // rosado, como la página
 
 let clienteGoogle;
 
-/** true si .env tiene las credenciales y el calendario, y el archivo de credenciales existe. */
+// Credenciales de la cuenta de servicio: en Vercel, el contenido del JSON en GOOGLE_CREDENCIALES_JSON;
+// en local, la ruta del archivo en GOOGLE_CREDENCIALES.
+function credenciales() {
+  const { GOOGLE_CREDENCIALES_JSON, GOOGLE_CREDENCIALES } = process.env;
+  if (GOOGLE_CREDENCIALES_JSON) return { credentials: JSON.parse(GOOGLE_CREDENCIALES_JSON) };
+  return { keyFile: GOOGLE_CREDENCIALES };
+}
+
+/** true si están el calendario y las credenciales (variable con el JSON o archivo existente). */
 export function calendarioConfigurado() {
-  const { GOOGLE_CREDENCIALES, GOOGLE_CALENDAR_ID } = process.env;
-  return Boolean(GOOGLE_CREDENCIALES && GOOGLE_CALENDAR_ID && existsSync(GOOGLE_CREDENCIALES));
+  const { GOOGLE_CREDENCIALES_JSON, GOOGLE_CREDENCIALES, GOOGLE_CALENDAR_ID } = process.env;
+  const hayCredenciales = Boolean(GOOGLE_CREDENCIALES_JSON) || Boolean(GOOGLE_CREDENCIALES && existsSync(GOOGLE_CREDENCIALES));
+  return Boolean(GOOGLE_CALENDAR_ID) && hayCredenciales;
 }
 
 async function pedirGoogle(ruta, opciones = {}) {
   clienteGoogle ??= new GoogleAuth({
-    keyFile: process.env.GOOGLE_CREDENCIALES,
+    ...credenciales(),
     scopes: ['https://www.googleapis.com/auth/calendar.events'],
   });
   const calendario = encodeURIComponent(process.env.GOOGLE_CALENDAR_ID);
@@ -36,6 +45,7 @@ export function explicarError(error) {
   if (/insufficient authentication scopes/i.test(detalle)) return `El servidor pidió un permiso distinto al configurado. (${detalle})`;
   if (estado === 404) return 'No se encontró el calendario: revisa GOOGLE_CALENDAR_ID y que esté compartido con la cuenta de servicio.';
   if (estado === 403) return `La cuenta de servicio no tiene permiso: compártele el calendario con "Hacer cambios en eventos". (${detalle})`;
+  if (error instanceof SyntaxError) return 'GOOGLE_CREDENCIALES_JSON no es un JSON válido: pega el contenido completo del archivo de la clave.';
   if (/invalid_grant|invalid_client|account not found/i.test(detalle)) return `Las credenciales no son válidas: descarga de nuevo la clave JSON. (${detalle})`;
   return detalle;
 }

@@ -11,18 +11,18 @@ export async function sincronizarCita(cita) {
   }
   try {
     await crearEventoCita(cita);
-    marcarCalendario(cita.id, 'sincronizada');
+    await marcarCalendario(cita.id, 'sincronizada');
     return 'sincronizada';
   } catch (error) {
     console.error(`[Google Calendar] No se pudo crear el evento de la cita ${cita.id}: ${explicarError(error)}`);
-    marcarCalendario(cita.id, 'error');
+    await marcarCalendario(cita.id, 'error').catch(() => {});
     return 'error';
   }
 }
 
 /** Pasa al calendario las citas de hoy en adelante que todavía no tienen evento. */
 export async function sincronizarPendientes() {
-  const citas = citasSinSincronizar(ahoraEnColombia().fecha);
+  const citas = await citasSinSincronizar(ahoraEnColombia().fecha);
   const resumen = { total: citas.length, sincronizada: 0, error: 0, pendiente: 0 };
   for (const cita of citas) resumen[await sincronizarCita(cita)]++;
   return resumen;
